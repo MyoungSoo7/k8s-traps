@@ -1,0 +1,20 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.MyoungSoo7/k8s-traps",
+  "title": "k8s-traps",
+  "description": "Finds Kubernetes manifest traps that pass linters and still break production. Offline, read-only.",
+  "repository": {
+    "url": "https://github.com/MyoungSoo7/k8s-traps",
+    "source": "github"
+  },
+  "version": "0.1.0",
+  "packages": [
+    {
+      "registryType": "pypi",
+      "identifier": "k8s-traps",
+      "version": "0.1.0",
+      "runtimeHint": "uvx",
+      "transport": { "type": "stdio" }
+    }
+  ]
+}
