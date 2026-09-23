@@ -27,7 +27,7 @@ Full explanations, including the incident behind each trap: [docs/traps.md](docs
 ## CLI
 
 ```bash
-pip install git+https://github.com/MyoungSoo7/k8s-traps
+pip install k8s-traps
 helm template my-chart | k8s-traps            # stdin
 k8s-traps manifests/ --fail-on medium         # files or directories; exit 1 at/above severity
 k8s-traps deploy.yaml --json --trap T01 --trap T02
@@ -52,6 +52,12 @@ Generic MCP client config:
 
 ```json
 { "mcpServers": { "k8s-traps": { "command": "k8s-traps-mcp" } } }
+```
+
+Without installing first (this is what the MCP Registry entry runs):
+
+```json
+{ "mcpServers": { "k8s-traps": { "command": "uvx", "args": ["k8s-traps", "--mcp"] } } }
 ```
 
 ## Development

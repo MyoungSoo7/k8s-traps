@@ -31,8 +31,14 @@ def main(argv: list[str] | None = None) -> int:
                         help="exit 1 if any finding is at or above this severity (default: high)")
     parser.add_argument("--json", action="store_true", help="emit JSON")
     parser.add_argument("--list", action="store_true", help="list traps and exit")
+    parser.add_argument("--mcp", action="store_true", help="run the MCP server on stdio (same as k8s-traps-mcp)")
     parser.add_argument("--version", action="version", version=__version__)
     args = parser.parse_args(argv)
+
+    if args.mcp:
+        from .server import main as serve
+        serve()
+        return 0
 
     if args.list:
         for t in TRAPS.values():

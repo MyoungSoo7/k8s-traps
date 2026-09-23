@@ -14,7 +14,15 @@
       "identifier": "k8s-traps",
       "version": "0.1.0",
       "runtimeHint": "uvx",
-      "transport": { "type": "stdio" }
+      "transport": {
+        "type": "stdio"
+      },
+      "packageArguments": [
+        {
+          "type": "named",
+          "name": "--mcp"
+        }
+      ]
     }
   ]
 }

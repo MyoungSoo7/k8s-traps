@@ -49,3 +49,16 @@ def test_every_trap_documented():
     doc = (pathlib.Path(__file__).parent.parent / "docs" / "traps.md").read_text()
     for trap_id in TRAPS:
         assert f'<a id="{trap_id.lower()}"></a>' in doc
+
+
+def test_cli_mcp_flag_serves_stdio():
+    # The MCP Registry entry runs `uvx k8s-traps --mcp`, so the CLI entry point must start the server.
+    import subprocess
+    import sys
+    init = {"jsonrpc": "2.0", "id": 1, "method": "initialize",
+            "params": {"protocolVersion": "2025-06-18", "capabilities": {},
+                       "clientInfo": {"name": "test", "version": "0"}}}
+    proc = subprocess.run([sys.executable, "-m", "k8s_traps.cli", "--mcp"], input=json.dumps(init) + "\n",
+                          capture_output=True, text=True, timeout=30)
+    reply = json.loads(proc.stdout.splitlines()[0])
+    assert reply["result"]["serverInfo"]["name"] == "k8s-traps"
