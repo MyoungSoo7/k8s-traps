@@ -1,0 +1,37 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "k8s-traps"
+version = "0.1.0"
+description = "Kubernetes manifest traps that pass linters and still break production — CLI and MCP server"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.10"
+authors = [{ name = "Myoungsoo Lim" }]
+keywords = ["kubernetes", "k8s", "security", "mcp", "linter", "manifests", "prometheus"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Topic :: System :: Systems Administration",
+  "Topic :: Security",
+]
+dependencies = ["pyyaml>=6", "mcp>=2.2"]
+
+[project.optional-dependencies]
+test = ["pytest>=8"]
+
+[project.scripts]
+k8s-traps = "k8s_traps.cli:main"
+k8s-traps-mcp = "k8s_traps.server:main"
+
+[project.urls]
+Homepage = "https://github.com/MyoungSoo7/k8s-traps"
+Documentation = "https://github.com/MyoungSoo7/k8s-traps/blob/main/docs/traps.md"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/k8s_traps"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
